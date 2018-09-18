@@ -24,6 +24,9 @@ public class Player {
 	}
 	
 	public void split() {
+		if(hand.get(0).getNumber() != hand.get(1).getNumber()) {
+			return;
+		}
 		Card card = hand.remove(1);
 		hand2.add(card);
 		

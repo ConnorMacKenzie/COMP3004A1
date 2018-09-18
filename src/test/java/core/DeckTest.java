@@ -34,8 +34,30 @@ public class DeckTest extends TestCase {
 		Card card2 = deck.draw();
 		
 		assertEquals(49, deck.cardsInDeck());
-		assertTrue(((card.getValue() != 1) && (card.getSuit() != "H"))
-					&& ((card1.getValue() != 2) && (card1.getSuit() != "H"))
-					&& ((card2.getValue() != 3) && (card2.getSuit() != "H")));
+		assertTrue(((card.getValue() != 2) && (card.getSuit() != "H"))
+					&& ((card1.getValue() != 3) && (card1.getSuit() != "H"))
+					&& ((card2.getValue() != 4) && (card2.getSuit() != "H")));
+	}
+	
+	public void testMockDeck() {
+		Deck deck = new Deck();
+		deck.mockDeck();
+		
+		assertEquals(0, deck.cardsInDeck());
+	}
+	
+	public void testMockAddCard() {
+		Deck deck = new Deck();
+		deck.mockDeck();
+		
+		assertEquals(0, deck.cardsInDeck());
+		
+		Card card = new Card("H", "2", 2);
+		deck.mockAddCard(card);
+		
+		assertEquals(1, deck.cardsInDeck());
+		Card card1 = deck.draw();
+		assertEquals(0, deck.cardsInDeck());
+		assertTrue((card1.getValue() == 2) && (card1.getSuit() == "H") && (card1.getNumber() == "2"));
 	}
 }

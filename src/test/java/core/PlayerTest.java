@@ -13,12 +13,4 @@ public class PlayerTest extends TestCase {
 		assertTrue(player.busted == false);
 	}
 	
-	public void testPlayerTurn() {
-		
-	}
-	
-	public void testDealerTurn() {
-		
-	}
-	
 }

@@ -125,4 +125,12 @@ public class Deck {
 		return cardList.remove(0);
 	}
 	
+	public void mockDeck() {
+		cardList.clear();
+	}
+	
+	public void mockAddCard(Card card) {
+		cardList.add(card);
+	}
+	
 }

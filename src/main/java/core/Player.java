@@ -20,7 +20,7 @@ public class Player {
 		hand.add(card);
 		hand.add(card1);
 		
-		this.handTotal = totalHand();
+		this.handTotal = totalHand(1);
 	}
 	
 	public void split() {
@@ -32,14 +32,28 @@ public class Player {
 		
 		hand.add(card1);
 		hand2.add(card2);
+		
+		this.handTotal = totalHand(1);
+		this.handTotal2 = totalHand(2);
 	}
 	
-	private int totalHand() {
+	private int totalHand(int hand) {
 		int total = 0;
-		for (Card card : this.hand) 
-		{ 
-		    total += card.getValue();
+		switch(hand) {
+		case 1:
+			for (Card card : this.hand) 
+			{ 
+			    total += card.getValue();
+			}
+			break;
+		case 2:
+			for (Card card : this.hand2) 
+			{ 
+			    total += card.getValue();
+			}
+			break;
 		}
+		
 		return total;
 	}
 }

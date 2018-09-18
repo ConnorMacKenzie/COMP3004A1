@@ -9,7 +9,19 @@ public class PlayerTest extends TestCase {
 		Player player = new Player(deck);
 		assertEquals(54, deck.cardsInDeck());
 		assertTrue(player.hand.isEmpty() == false);
-		assertTrue(2 <= player.handTotal && player.handTotal <= 21);
+		assertTrue(2 <= player.handTotal(1) && player.handTotal(1) <= 21);
+		assertTrue(player.busted == false);
+	}
+	
+	public void testSplit() {
+		Deck deck = new Deck();
+		Player player = new Player(deck);
+		assertEquals(54, deck.cardsInDeck());
+		assertTrue(player.hand.isEmpty() == false);
+		assertTrue(player.hand2.isEmpty() == true);
+		player.split();
+		assertTrue(2 <= player.handTotal(1) && player.handTotal(1) <= 21);
+		assertTrue(2 <= player.handTotal(2) && player.handTotal(2) <= 21);
 		assertTrue(player.busted == false);
 	}
 	

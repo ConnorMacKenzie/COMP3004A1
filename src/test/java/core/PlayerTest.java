@@ -27,12 +27,12 @@ public class PlayerTest extends TestCase {
 		Player player = new Player(deck);
 		
 		assertEquals(1, deck.cardsInDeck());
-		assertTrue(player.handTotal == 11);
+		assertEquals(11, player.handTotal);
 		
 		player.hit(1);
 		assertEquals(0, deck.cardsInDeck());
-		assertTrue(player.handTotal == 21);
-		assertTrue(player.busted == false);
+		assertEquals(21, player.handTotal);
+		assertEquals(false, player.busted);
 	}
 	
 	public void testHitAndBust() {
@@ -73,15 +73,16 @@ public class PlayerTest extends TestCase {
 		Player player = new Player(deck);
 		
 		assertEquals(2, deck.cardsInDeck());
-		assertTrue(player.hand.isEmpty() == false);
-		assertTrue(player.hand2.isEmpty() == true);
+		assertEquals(false, player.hand.isEmpty());
+		assertEquals(true, player.hand2.isEmpty());
 		
 		player.split();
 		
 		assertEquals(0, deck.cardsInDeck());
-		assertTrue(2 <= player.handTotal && player.handTotal <= 21);
-		assertTrue(2 <= player.handTotal2 && player.handTotal2 <= 21);
-		assertTrue(player.busted == false);
+		assertEquals(6, player.handTotal);
+		assertEquals(7, player.handTotal2);
+		assertEquals(false, player.busted);
+		assertEquals(false, player.busted2);
 	}
 	
 	public void testDoesNotSplitWithDiffCards() {
@@ -99,16 +100,16 @@ public class PlayerTest extends TestCase {
 		
 		Player player = new Player(deck);
 		assertEquals(2, deck.cardsInDeck());
-		assertTrue(player.hand.isEmpty() == false);
-		assertTrue(player.hand2.isEmpty() == true);
+		assertEquals(false, player.hand.isEmpty());
+		assertEquals(true, player.hand2.isEmpty());
 		
 		player.split();
 		
 		assertEquals(2, deck.cardsInDeck());
-		assertTrue(player.hand.isEmpty() == false);
-		assertTrue(player.hand2.isEmpty() == true);
-		assertTrue(2 <= player.handTotal && player.handTotal <= 21);
-		assertTrue(player.busted == false);
+		assertEquals(false, player.hand.isEmpty());
+		assertEquals(true, player.hand2.isEmpty());
+		assertEquals(5, player.handTotal);
+		assertEquals(false, player.busted);
 	}
 	
 	public void testSplitAndHitBothHands() {
@@ -130,24 +131,24 @@ public class PlayerTest extends TestCase {
 		
 		Player player = new Player(deck);
 		assertEquals(4, deck.cardsInDeck());
-		assertTrue(player.hand.isEmpty() == false);
-		assertTrue(player.hand2.isEmpty() == true);
+		assertEquals(false, player.hand.isEmpty());
+		assertEquals(true, player.hand2.isEmpty());
 		
 		player.split();
 		
 		assertEquals(2, deck.cardsInDeck());
-		assertTrue(player.hand.isEmpty() == false);
-		assertTrue(player.hand2.isEmpty() == false);
-		assertTrue(player.handTotal == 9);
-		assertTrue(player.handTotal2 == 11);
+		assertEquals(false, player.hand.isEmpty());
+		assertEquals(false, player.hand2.isEmpty());
+		assertEquals(9, player.handTotal);
+		assertEquals(11, player.handTotal2);
 		
 		player.hit(1);
-		assertTrue(player.handTotal == 19);
-		assertTrue(player.busted == false);
+		assertEquals(19, player.handTotal);
+		assertEquals(false, player.busted);
 		
 		player.hit(2);
-		assertTrue(player.handTotal == 21);
-		assertTrue(player.busted == false);
+		assertEquals(21, player.handTotal);
+		assertEquals(false, player.busted);
 	}
 	
 	public void testSplitAndHitBustFirst() {
@@ -169,24 +170,24 @@ public class PlayerTest extends TestCase {
 		
 		Player player = new Player(deck);
 		assertEquals(4, deck.cardsInDeck());
-		assertTrue(player.hand.isEmpty() == false);
-		assertTrue(player.hand2.isEmpty() == true);
+		assertEquals(false, player.hand.isEmpty());
+		assertEquals(true, player.hand2.isEmpty());
 		
 		player.split();
 		
 		assertEquals(2, deck.cardsInDeck());
-		assertTrue(player.hand.isEmpty() == false);
-		assertTrue(player.hand2.isEmpty() == false);
-		assertTrue(player.handTotal == 12);
-		assertTrue(player.handTotal2 == 11);
+		assertEquals(false, player.hand.isEmpty());
+		assertEquals(false, player.hand2.isEmpty());
+		assertEquals(12, player.handTotal);
+		assertEquals(11, player.handTotal2);
 		
 		player.hit(1);
-		assertTrue(player.handTotal == 22);
-		assertTrue(player.busted == true);
+		assertEquals(22, player.handTotal);
+		assertEquals(true, player.busted);
 		
 		player.hit(2);
-		assertTrue(player.handTotal == 21);
-		assertTrue(player.busted == false);
+		assertEquals(21, player.handTotal);
+		assertEquals(false, player.busted);
 	}
 	
 	public void testSplitAndHitBustBoth() {
@@ -208,24 +209,24 @@ public class PlayerTest extends TestCase {
 		
 		Player player = new Player(deck);
 		assertEquals(4, deck.cardsInDeck());
-		assertTrue(player.hand.isEmpty() == false);
-		assertTrue(player.hand2.isEmpty() == true);
+		assertEquals(false, player.hand.isEmpty());
+		assertEquals(true, player.hand2.isEmpty());
 		
 		player.split();
 		
 		assertEquals(2, deck.cardsInDeck());
-		assertTrue(player.hand.isEmpty() == false);
-		assertTrue(player.hand2.isEmpty() == false);
-		assertTrue(player.handTotal == 12);
-		assertTrue(player.handTotal2 == 12);
+		assertEquals(false, player.hand.isEmpty());
+		assertEquals(false, player.hand2.isEmpty());
+		assertEquals(12, player.handTotal);
+		assertEquals(12, player.handTotal2);
 		
 		player.hit(1);
-		assertTrue(player.handTotal == 22);
-		assertTrue(player.busted == true);
+		assertEquals(22, player.handTotal);
+		assertEquals(true, player.busted);
 		
 		player.hit(2);
-		assertTrue(player.handTotal == 22);
-		assertTrue(player.busted == true);
+		assertEquals(22, player.handTotal);
+		assertEquals(true, player.busted);
 	}
 	
 }

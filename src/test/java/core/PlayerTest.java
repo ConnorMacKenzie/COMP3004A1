@@ -49,11 +49,11 @@ public class PlayerTest extends TestCase {
 		Player player = new Player(deck);
 		
 		assertEquals(1, deck.cardsInDeck());
-		assertTrue(player.handTotal == 12);
+		assertEquals(13, player.handTotal);
 		
 		player.hit(1);
 		assertEquals(0, deck.cardsInDeck());
-		assertTrue(player.handTotal == 22);
+		assertTrue(player.handTotal == 23);
 		assertTrue(player.busted == true);
 	}
 	
@@ -147,8 +147,8 @@ public class PlayerTest extends TestCase {
 		assertEquals(false, player.busted);
 		
 		player.hit(2);
-		assertEquals(21, player.handTotal);
-		assertEquals(false, player.busted);
+		assertEquals(21, player.handTotal2);
+		assertEquals(false, player.busted2);
 	}
 	
 	public void testSplitAndHitBustFirst() {
@@ -156,9 +156,9 @@ public class PlayerTest extends TestCase {
 		deck.mockDeck();
 		
 		Card card1 = new Card("H", "8", 8);
-		Card card2 = new Card("D", "5", 5);
+		Card card2 = new Card("D", "8", 8);
 		Card card3 = new Card("H", "4", 4);
-		Card card4 = new Card("H", "6", 6);
+		Card card4 = new Card("H", "3", 3);
 		Card card5 = new Card("H", "J", 10);
 		Card card6 = new Card("H", "Q", 10);
 		deck.mockAddCard(card1);
@@ -195,7 +195,7 @@ public class PlayerTest extends TestCase {
 		deck.mockDeck();
 		
 		Card card1 = new Card("H", "8", 8);
-		Card card2 = new Card("D", "6", 6);
+		Card card2 = new Card("D", "8", 8);
 		Card card3 = new Card("H", "4", 4);
 		Card card4 = new Card("H", "6", 6);
 		Card card5 = new Card("H", "J", 10);
@@ -218,14 +218,14 @@ public class PlayerTest extends TestCase {
 		assertEquals(false, player.hand.isEmpty());
 		assertEquals(false, player.hand2.isEmpty());
 		assertEquals(12, player.handTotal);
-		assertEquals(12, player.handTotal2);
+		assertEquals(14, player.handTotal2);
 		
 		player.hit(1);
 		assertEquals(22, player.handTotal);
 		assertEquals(true, player.busted);
 		
 		player.hit(2);
-		assertEquals(22, player.handTotal);
+		assertEquals(24, player.handTotal);
 		assertEquals(true, player.busted);
 	}
 	

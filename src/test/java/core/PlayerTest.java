@@ -57,6 +57,35 @@ public class PlayerTest extends TestCase {
 		assertTrue(player.busted == true);
 	}
 	
+	public void testHitUntilBust() {
+		Deck deck = new Deck();
+		deck.mockDeck();
+		
+		Card card1 = new Card("H", "6", 6);
+		Card card2 = new Card("D", "7", 7);
+		Card card3 = new Card("H", "2", 2);
+		Card card4 = new Card("H", "10", 10);
+		deck.mockAddCard(card1);
+		deck.mockAddCard(card2);
+		deck.mockAddCard(card3);
+		deck.mockAddCard(card4);
+		
+		Player player = new Player(deck);
+		
+		assertEquals(2, deck.cardsInDeck());
+		assertEquals(13, player.handTotal);
+		
+		player.hit(1);
+		assertEquals(1, deck.cardsInDeck());
+		assertTrue(player.handTotal == 15);
+		assertTrue(player.busted == false);
+		
+		player.hit(1);
+		assertEquals(0, deck.cardsInDeck());
+		assertTrue(player.handTotal == 25);
+		assertTrue(player.busted == true);
+	}
+	
 	public void testSplit() {
 		Deck deck = new Deck();
 		deck.mockDeck();

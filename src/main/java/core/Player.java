@@ -24,6 +24,27 @@ public class Player {
 		this.handTotal = totalHand(1);
 	}
 	
+	public void hit(int hand) {
+		Card card = deck.draw();
+		
+		switch(hand) {
+		case 1:
+			this.hand.add(card);
+			this.handTotal = totalHand(1);
+			if( this.handTotal > 21) {
+				this.busted = true;
+			}
+			break;
+		case 2:
+			this.hand2.add(card);
+			this.handTotal2 = totalHand(2);
+			if( this.handTotal2 > 21) {
+				this.busted2 = true;
+			}
+			break;
+		}
+	}
+	
 	public void split() {
 		if(hand.get(0).getNumber() != hand.get(1).getNumber()) {
 			return;

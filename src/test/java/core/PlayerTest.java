@@ -186,8 +186,8 @@ public class PlayerTest extends TestCase {
 		assertEquals(true, player.busted);
 		
 		player.hit(2);
-		assertEquals(21, player.handTotal);
-		assertEquals(false, player.busted);
+		assertEquals(21, player.handTotal2);
+		assertEquals(false, player.busted2);
 	}
 	
 	public void testSplitAndHitBustBoth() {
@@ -225,8 +225,8 @@ public class PlayerTest extends TestCase {
 		assertEquals(true, player.busted);
 		
 		player.hit(2);
-		assertEquals(24, player.handTotal);
-		assertEquals(true, player.busted);
+		assertEquals(24, player.handTotal2);
+		assertEquals(true, player.busted2);
 	}
 	
 }

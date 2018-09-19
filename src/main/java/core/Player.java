@@ -11,6 +11,7 @@ public class Player {
 	int handTotal2;
 	Deck deck;
 	boolean busted = false; 
+	boolean busted2 = false; 
 	
 	public Player(Deck deck) {
 		this.deck = deck;

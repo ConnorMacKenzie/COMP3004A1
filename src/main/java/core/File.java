@@ -97,10 +97,26 @@ public class File {
 	}
 	
 	public static void playerTurnFile(Player player, File file) {
-		writePlayerHand(player, file);
+		String hand1 = "Player Hand: ";
+		for(Card card: player.hand) {
+			hand1 += card.getSuit() + card.getNumber() + " ";
+		}
+		file.content.add(hand1);
+		file.content.add("Player Total: " + player.handTotal);
+		
+		if(player.handTotal == 21) {
+			file.content.add("21!");
+			writeFile(file.path, file.content);
+			return;
+		}
+		
+		file.content.add("On the line below enter your next action, hit (h), stand (s) or split (d)");
+		writeFile(file.path, file.content);
+		
 		while(file.content.size() == readFile(file.path).size()) {
 			
 		}
+		
 		file.content = readFile(file.path);
 		String action = file.content.get(file.content.size() - 1);
 		
@@ -118,7 +134,7 @@ public class File {
 		case "s":
 			break;
 		case "d":
-			if(player.hand.get(0).getNumber() != player.hand.get(1).getNumber()) {
+			if(!player.hand.get(0).getNumber().equals(player.hand.get(1).getNumber())) {
 				file.content.add("Cannot split on different card values");
 				writeFile(file.path, file.content);
 				playerTurnFile(player, file);
@@ -146,9 +162,16 @@ public class File {
 			}
 			file.content.add(hand1);
 			file.content.add("Player First Total: " + player.handTotal);
-			file.content.add("Would you like to hit (h) or stand (s)?");
 			
-			writePlayerHand(player, file);
+			if(player.handTotal == 21) {
+				file.content.add("21!");
+				writeFile(file.path, file.content);
+				return;
+			}
+			
+			file.content.add("Would you like to hit (h) or stand (s)?");
+			writeFile(file.path, file.content);
+			
 			while(file.content.size() == readFile(file.path).size()) {
 				
 			}
@@ -183,9 +206,16 @@ public class File {
 			}
 			file.content.add(hand2);
 			file.content.add("Player Second Total: " + player.handTotal2);
+			
+			if(player.handTotal2 == 21) {
+				file.content.add("21!");
+				writeFile(file.path, file.content);
+				return;
+			}
+			
 			file.content.add("Would you like to hit (h) or stand (s)?");
 			
-			writePlayerHand(player, file);
+			writeFile(file.path, file.content);
 			while(file.content.size() == readFile(file.path).size()) {
 				
 			}
@@ -232,7 +262,19 @@ public class File {
 				dealerTurnFile(dealer, file);
 			}
 			else {
-				file.content.add("Dealer first hand busted with: " + dealer.handTotal + "\n");
+				file.content.add("Dealer busted with: " + dealer.handTotal + "\n");
+				writeFile(file.path, file.content);
+			}
+		}
+		else if(dealer.handTotal == 17 && (dealer.hand.get(0).getNumber().equals("A") || dealer.hand.get(1).getNumber().equals("A"))){
+			file.content.add("Dealer is hitting");
+			writeFile(file.path, file.content);
+			dealer.hit(1);
+			if(!dealer.busted) {
+				dealerTurnFile(dealer, file);
+			}
+			else {
+				file.content.add("Dealer busted with: " + dealer.handTotal + "\n");
 				writeFile(file.path, file.content);
 			}
 		}
@@ -240,17 +282,6 @@ public class File {
 			file.content.add("Dealer is standing");
 			writeFile(file.path, file.content);
 		}
-	}
-	
-	public static void writePlayerHand(Player player, File file) {
-		String hand1 = "Player Hand: ";
-		for(Card card: player.hand) {
-			hand1 += card.getSuit() + card.getNumber() + " ";
-		}
-		file.content.add(hand1);
-		file.content.add("Player Total: " + player.handTotal);
-		file.content.add("On the line below enter your next action, hit (h), stand (s) or split (d)");
-		writeFile(file.path, file.content);
 	}
 	
 	public static List<String> readFile(String fileName){

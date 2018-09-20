@@ -46,7 +46,7 @@ public class Deck {
 		Card card36 = new Card("S", "J", 10);
 		Card card37 = new Card("S", "Q", 10);
 		Card card38 = new Card("S", "K", 10);
-		Card card39 = new Card("S", "A", 1);
+		Card card39 = new Card("S", "A", 11);
 		Card card40 = new Card("C", "2", 2);
 		Card card41 = new Card("C", "3", 3);
 		Card card42 = new Card("C", "4", 4);
@@ -59,7 +59,7 @@ public class Deck {
 		Card card49 = new Card("C", "J", 10);
 		Card card50 = new Card("C", "Q", 10);
 		Card card51 = new Card("C", "K", 10);
-		Card card52 = new Card("C", "A", 10);
+		Card card52 = new Card("C", "A", 11);
 		
 		cardList.add(card1);
 		cardList.add(card2);

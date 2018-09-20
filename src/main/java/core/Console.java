@@ -11,7 +11,6 @@ public class Console {
 		
 		System.out.println("Dealers Hand: " + dealer.hand.get(0).getSuit() + dealer.hand.get(0).getNumber() + "\n");
 		
-		
 		playerTurnConsole(player);
 		if((player.busted && player.hand2.isEmpty()) || (player.busted && player.busted2)) {
 			System.out.print("Dealer wins with: ");
@@ -75,6 +74,11 @@ public class Console {
 		}
 		System.out.println("\nPlayer Total: " + player.handTotal + "\n");
 		
+		if(player.handTotal == 21) {
+			System.out.println("21!");
+			return;
+		}
+		
 		System.out.println("Would you like to hit (h), stand (s) or split (d)?");
 		String in = input.nextLine();
 		
@@ -91,7 +95,7 @@ public class Console {
 		case "s":
 			break;
 		case "d":
-			if(player.hand.get(0).getNumber() != player.hand.get(1).getNumber()) {
+			if(!player.hand.get(0).getNumber().equals(player.hand.get(1).getNumber())) {
 				System.out.println("Cannot split on different card values \n");
 				playerTurnConsole(player);
 			}
@@ -117,6 +121,11 @@ public class Console {
 				System.out.print(card.getSuit() + card.getNumber() + " ");
 			}
 			System.out.println("\nPlayer First Total: " + player.handTotal + "\n");
+			
+			if(player.handTotal == 21) {
+				System.out.println("21!");
+				playerTurnSplitConsole(2, player);
+			}
 			
 			System.out.println("Would you like to hit (h) or stand (s)?");
 			String in = input.nextLine();
@@ -146,6 +155,11 @@ public class Console {
 				System.out.print(card.getSuit() + card.getNumber() + " ");
 			}
 			System.out.println("\nPlayer Second Total: " + player.handTotal + "\n");
+			
+			if(player.handTotal2 == 21) {
+				System.out.println("21!");
+				return;
+			}
 			
 			System.out.println("Would you like to hit (h) or stand (s)?");
 			String in2 = input.nextLine();
@@ -186,7 +200,17 @@ public class Console {
 				dealerTurnConsole(dealer);
 			}
 			else {
-				System.out.println("Dealer first hand busted with: " + dealer.handTotal + "\n");
+				System.out.println("Dealer busted with: " + dealer.handTotal + "\n");
+			}
+		}
+		else if(dealer.handTotal == 17 && (dealer.hand.get(0).getNumber().equals("A") || dealer.hand.get(1).getNumber().equals("A"))){
+			System.out.println("Dealer is hitting \n");
+			dealer.hit(1);
+			if(!dealer.busted) {
+				dealerTurnConsole(dealer);
+			}
+			else {
+				System.out.println("Dealer busted with: " + dealer.handTotal + "\n");
 			}
 		}
 		else {

@@ -21,6 +21,11 @@ public class Player {
 		hand.add(card1);
 		
 		this.handTotal = totalHand(1);
+		
+		if(this.handTotal > 21) {
+			this.hand.get(0).setValue(1);
+			this.handTotal = totalHand(1);
+		}
 	}
 	
 	public void hit(int hand) {
@@ -31,6 +36,13 @@ public class Player {
 			this.hand.add(card);
 			this.handTotal = totalHand(1);
 			if( this.handTotal > 21) {
+				for(Card card2: this.hand) {
+					if(card2.getNumber().equals("A") && (card2.getValue() == 11)) {
+						card2.setValue(1);
+						this.handTotal = totalHand(1);
+						return;
+					}
+				}
 				this.busted = true;
 			}
 			break;

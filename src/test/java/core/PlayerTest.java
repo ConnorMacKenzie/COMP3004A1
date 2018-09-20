@@ -57,7 +57,7 @@ public class PlayerTest extends TestCase {
 		assertTrue(player.busted == true);
 	}
 	
-	public void testHitWithAceTurnTo1() {
+	public void testHitWithAceTurnToOne() {
 		Deck deck = new Deck();
 		deck.mockDeck();
 		
@@ -76,6 +76,44 @@ public class PlayerTest extends TestCase {
 		player.hit(1);
 		assertEquals(0, deck.cardsInDeck());
 		assertTrue(player.handTotal == 17);
+		assertTrue(player.busted == false);
+	}
+	
+	public void testHitWithTwoAceTurnToOne() {
+		Deck deck = new Deck();
+		deck.mockDeck();
+		
+		Card card1 = new Card("H", "A", 11);
+		Card card2 = new Card("D", "A", 11);
+		Card card3 = new Card("H", "10", 10);
+		deck.mockAddCard(card1);
+		deck.mockAddCard(card2);
+		deck.mockAddCard(card3);
+		
+		Player player = new Player(deck);
+		
+		assertEquals(1, deck.cardsInDeck());
+		assertEquals(12, player.handTotal);
+		
+		player.hit(1);
+		assertEquals(0, deck.cardsInDeck());
+		assertTrue(player.handTotal == 12);
+		assertTrue(player.busted == false);
+	}
+	
+	public void testDoubleAveTurnOnlyOne() {
+		Deck deck = new Deck();
+		deck.mockDeck();
+		
+		Card card1 = new Card("H", "A", 11);
+		Card card2 = new Card("D", "A", 11);
+		deck.mockAddCard(card1);
+		deck.mockAddCard(card2);
+		
+		Player player = new Player(deck);
+		
+		assertEquals(0, deck.cardsInDeck());
+		assertEquals(12, player.handTotal);
 		assertTrue(player.busted == false);
 	}
 	

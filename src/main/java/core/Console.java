@@ -98,6 +98,7 @@ public class Console {
 			if(!player.hand.get(0).getNumber().equals(player.hand.get(1).getNumber())) {
 				System.out.println("Cannot split on different card values \n");
 				playerTurnConsole(player);
+				break;
 			}
 			else {
 				player.split();
@@ -193,7 +194,11 @@ public class Console {
 		}
 		System.out.println("\nDealer Total: " + dealer.handTotal + "\n");
 		
-		if(dealer.handTotal < 17) {
+		if(dealer.handTotal == 21) {
+			System.out.println("21!");
+			return;
+		}
+		else if(dealer.handTotal < 17) {
 			System.out.println("Dealer is hitting \n");
 			dealer.hit(1);
 			if(!dealer.busted) {

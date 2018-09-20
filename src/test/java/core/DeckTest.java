@@ -30,13 +30,9 @@ public class DeckTest extends TestCase {
 	public void testDeckIsShuffled() {
 		Deck deck = new Deck();
 		Card card = deck.draw();
-		Card card1 = deck.draw();
-		Card card2 = deck.draw();
 		
 		assertEquals(49, deck.cardsInDeck());
-		assertTrue(((card.getValue() != 2) && (card.getSuit() != "H"))
-					&& ((card1.getValue() != 3) && (card1.getSuit() != "H"))
-					&& ((card2.getValue() != 4) && (card2.getSuit() != "H")));
+		assertTrue((card.getValue() != 2) && (card.getSuit() != "H"));
 	}
 	
 	public void testMockDeck() {
@@ -51,7 +47,6 @@ public class DeckTest extends TestCase {
 		deck.mockDeck();
 		
 		assertEquals(0, deck.cardsInDeck());
-		
 		Card card = new Card("H", "2", 2);
 		deck.mockAddCard(card);
 		

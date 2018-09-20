@@ -138,6 +138,7 @@ public class File {
 				file.content.add("Cannot split on different card values");
 				writeFile(file.path, file.content);
 				playerTurnFile(player, file);
+				break;
 			}
 			else {
 				player.split();
@@ -254,7 +255,11 @@ public class File {
 		file.content.add("Dealer Total: " + dealer.handTotal);
 		writeFile(file.path, file.content);
 		
-		if(dealer.handTotal < 17) {
+		if(dealer.handTotal == 21) {
+			file.content.add("21!");
+			writeFile(file.path, file.content);
+		}
+		else if(dealer.handTotal < 17) {
 			file.content.add("Dealer is hitting");
 			writeFile(file.path, file.content);
 			dealer.hit(1);
